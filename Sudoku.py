@@ -1,4 +1,11 @@
-print("Welcome to Sudoku!")
+import time
+import datetime
+
+class TimeoutException(Exception):
+    def __init__(self):
+        Exception.__init__(self)
+
+startTime = datetime.datetime.now()
 
 myBoard = [
     [7,8,0,4,0,0,1,2,0],
@@ -13,10 +20,18 @@ myBoard = [
 ]
 
 def main():
-    draw_board(myBoard)
-    solve(myBoard)
-    print ("\n")
-    draw_board(myBoard)
+    print("Welcome to Sudoku!")
+    try: 
+        draw_board(myBoard)
+        print("Processing Sudoku Puzzle...")
+        solve(myBoard)
+        print ("\n")
+        draw_board(myBoard)
+        print ("Sudoku Successful!")
+        print ("It took:",str(datetime.datetime.now()-startTime)[-6:],"microseconds.")
+    except TimeoutException:
+        print("Maximum Time of 0.3 seconds reached, sudoku failed in required time.")
+
 
 # prints out our sudoku board above
 def draw_board(board):
@@ -34,11 +49,15 @@ def draw_board(board):
 
 # backtracking algorithm
 def solve(board):
-
-    myPrint = draw_board(board)
-    myPrint(board)
    
     print(board)
+
+    # calculates elapsed time and raises exception if sudoku takes more than 300 milliseconds
+    elapsedTime = datetime.datetime.now()-startTime
+    print("Elapsed time: ",elapsedTime)
+    if elapsedTime.total_seconds() >= 0.3:
+        raise TimeoutException()
+
     myFind = find_empty(board)
     if not myFind:                                             # if there are no empty squares and myFind returns False: 
         return True                                            # board is solved
@@ -86,6 +105,7 @@ def valid(board, number, position):
     return True                                                # if number isn't found at all, return True! (we have a valid position)
 
 
-
-main()
+# runs main
+if __name__ == '__main__':
+    main()
 
