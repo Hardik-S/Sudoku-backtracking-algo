@@ -1,5 +1,7 @@
 # Sudoku solver (backtracking algorithm)
 
+![Sudoku Picture](https://github.com/Hardik-S/Sudoku-backtracking-algo/blob/master/_project-2.png)
+
 Backtracking algorithm used to solve Sudoku (a constraint satisfaction problem). Incrementally builds solution candidates until completion, backtracks upon failure.
 
 Extended Explanation:
