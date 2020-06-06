@@ -46,7 +46,7 @@ def main():
         print("Sudoku Successful!")
         print("It took:", str(datetime.datetime.now() - startTime)[-6:], "microseconds.")
     except TimeoutException:
-        print("Maximum Time of 0.3 seconds reached, sudoku failed in required time.")
+        print("Maximum Time of 0.3 seconds reached, Sudoku failed in required time.")
 
 
 # prints out our sudoku board above
@@ -70,16 +70,16 @@ def solve(board):
     print(board)
 
     # calculates elapsed time and raises exception if sudoku takes more than 300 milliseconds
-    elapsedTime = datetime.datetime.now() - startTime
-    print("Elapsed time: ", elapsedTime)
-    if elapsedTime.total_seconds() >= 0.3:
+    elapsed_time = datetime.datetime.now() - startTime
+    print("Elapsed time: ", elapsed_time)
+    if elapsed_time.total_seconds() >= 0.3:
         raise TimeoutException()
 
-    myFind = find_empty(board)
-    if not myFind:  # if there are no empty squares and myFind returns False: 
+    my_find = find_empty(board)
+    if not my_find:  # if there are no empty squares and my_find returns False:
         return True  # board is solved
     else:
-        row, coloumn = myFind  # empty square becomes the one we work on
+        row, coloumn = my_find  # empty square becomes the one we work on
 
     for number in range(1, len(board) + 1):  # we pass every possible value, in this case 1-9 to validate
         if valid(board, number, (row, coloumn)):
